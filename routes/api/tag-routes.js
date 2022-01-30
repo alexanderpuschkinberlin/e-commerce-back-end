@@ -22,13 +22,33 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", async (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
+  try {
+    const tag = await Tag.findByPk(req.params.id, {
+      include: [
+        {
+          model: Product,
+          attributes: ["product_name"],
+        },
+      ],
+    });
+    res.status(200).json(tag);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json("Error while retrieving data from DB");
+  }
 });
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   // create a new tag
+  try {
+    const newTag = await Tag.create(req.body);
+    res.status(200).json(newTag);
+  } catch (error) {
+    console.log("Error", error);
+  }
 });
 
 router.put("/:id", (req, res) => {

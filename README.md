@@ -34,7 +34,7 @@ npm i
 
 - Make sure a MySQL database instance is running
 - run the schema.sql to prepare the database and its tables
-- run "npm run seed" to polulate the data
+- run "npm run seed" to populate the data
 - The application will start with the following command:
 
 ```
